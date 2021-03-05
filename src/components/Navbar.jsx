@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import styled, { css } from "styled-components/macro";
 import { menuData } from "../data/MenuData";
 import { Button } from "./Button";
@@ -70,9 +70,37 @@ const NavBtn = styled.div`
     display: none;
   }
 `;
+
 const Navbar = ({ toggle }) => {
+  const [navbar, setNavbar] = useState(false);
+  const location = useLocation();
+
+  const changeBackground = () => {
+    if (window.pageYOffset >= 60) {
+      setNavbar(true);
+    } else {
+      setNavbar(false);
+    }
+  };
+
+  useEffect(() => {
+    const watchScroll = () => {
+      window.addEventListener("scroll", changeBackground);
+    };
+    watchScroll();
+    return () => {
+      window.removeEventListener("scroll", changeBackground);
+    };
+  }, []);
+
+  let style = {
+    backgroundColor:
+      navbar || location.pathname !== "/" ? "#CD853F" : "transparent",
+    transition: "0.5s",
+  };
+
   return (
-    <Nav>
+    <Nav style={style}>
       <Logo to="/">Mkln.net</Logo>
       <MenuBars onClick={toggle} />
       <NavMenu>
@@ -83,7 +111,7 @@ const Navbar = ({ toggle }) => {
         ))}
       </NavMenu>
       <NavBtn>
-        <Button to="/contact" primary>
+        <Button to="/contact" primary="true">
           Contact Us
         </Button>
       </NavBtn>

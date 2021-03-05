@@ -65,11 +65,18 @@ const InfoSection = ({
   buttonLabel,
   reverse,
   image,
+  delay,
 }) => {
   return (
     <Section>
       <Container>
-        <ColumnLeft>
+        <ColumnLeft
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay={delay}
+          data-aos-anchor-placement="center bottom"
+          reverse={reverse}
+        >
           <h1>{heading}</h1>
           <p>{paragraphOne}</p>
           <p>{paragraphTwo}</p>
@@ -78,7 +85,14 @@ const InfoSection = ({
           </Button>
         </ColumnLeft>
         <ColumnRight reverse={reverse}>
-          <img src={image} alt="home" />
+          <img
+            data-aos="zoom-out"
+            data-aos-duration="1000"
+            data-aos-delay={delay}
+            data-aos-anchor-placement="center bottom"
+            src={image}
+            alt="home"
+          />
         </ColumnRight>
       </Container>
     </Section>
