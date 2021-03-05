@@ -78,7 +78,6 @@ const Listings = () => {
         <Heading>
           <h1
             data-aos="fade-right"
-            // data-aos-offset="300"
             data-aos-duration="1000"
             data-aos-easing="ease-in-sine"
           >

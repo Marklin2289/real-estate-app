@@ -63,34 +63,6 @@ const HeroImage = styled(motion.img)`
   object-fit: cover;
   opacity: 0.9;
 `;
-// const HeroContent = styled.div`
-//   position: relative;
-//   z-index: 10;
-//   display: flex;
-//   flex-direction: column;
-//   max-width: 1600px;
-//   width: calc(100%-100px);
-//   color: #ffffff;
-
-//   h1 {
-//     font-size: clamp(1rem, 8vw, 2rem);
-//     font-weight: 400;
-//     text-transform: uppercase;
-//     text-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
-//     text-align: left;
-//     margin-bottom: 0.8rem;
-//     filter: drop-shadow(0.05em 0.05em #0a0702);
-//     mix-blend-mode: difference;
-//   }
-
-//   p {
-//     font-weight: 600;
-//     margin-bottom: 1.2rem;
-//     text-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
-//     filter: drop-shadow(0.05em 0.05em #0a0702);
-//     mix-blend-mode: difference;
-//   }
-// `;
 
 const HeroContent = styled.div`
   position: relative;
@@ -162,25 +134,23 @@ const Hero = ({ slides }) => {
   const length = slides.length;
   const timeout = useRef(null);
 
-  //   useEffect(() => {
-  //     const nextSlide = () => {
-  //       setCurrent((current) => (current === length - 1 ? 0 : current + 1));
-  //     };
-  //     timeout.current = setTimeout(nextSlide, 2000);
-  //     return function () {
-  //       if (timeout.current) {
-  //         clearTimeout(timeout.current);
-  //       }
-  //     };
-  //   }, [current, length]);
+  useEffect(() => {
+    const nextSlide = () => {
+      setCurrent((current) => (current === length - 1 ? 0 : current + 1));
+    };
+    timeout.current = setTimeout(nextSlide, 7000);
+    return function () {
+      if (timeout.current) {
+        clearTimeout(timeout.current);
+      }
+    };
+  }, [current, length]);
 
   const nextSlide = () => {
     if (timeout.current) {
       clearTimeout(timeout.current);
     }
     setCurrent(current === length - 1 ? 0 : current + 1);
-
-    // console.log(current);
   };
 
   const prevSlide = () => {
@@ -188,7 +158,6 @@ const Hero = ({ slides }) => {
       clearTimeout(timeout.current);
     }
     setCurrent(current === 0 ? length - 1 : current - 1);
-    // console.log(current);
   };
   if (!Array.isArray(slides) || slides.length <= 0) {
     return null;
